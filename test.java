@@ -165,4 +165,67 @@
 //     }
 // }
 
-////////////////////////////////////////////// Insertion Sort //////////////////////////////////////////////
+////////////////////////////////////////////// Quick Sort //////////////////////////////////////////////
+// public class test{
+//     public static void qs(int[] arr, int start, int end){
+//         if(end<=start) return;
+//         int pivot  = partition(arr, start, end);
+//         qs(arr, start, pivot-1);
+//         qs(arr, pivot+1, end);
+//     }
+//     public static int partition(int[] array, int start, int end){
+//         int pivot = array[end];
+//         int i = start-1;
+//         for(int j=start; j<=end; j++){
+//             if(pivot>array[j]){
+//                 i++;
+//                 int temp = array[i];
+//                 array[i] = array[j];
+//                 array[j]= temp;
+//             }
+//         }
+//         i++;
+//         int temp = array[i];
+//         array[i] = array[end];
+//         array[end] = temp;
+//         return i;
+//     }
+
+
+
+//     public static void printArray(int[] arr) {
+//         for (int num : arr) {
+//             System.out.print(num + " ");
+//         }
+//         System.out.println();
+//     }
+
+//     public static void main(String[] args) {
+//         int[] array = {34, 544, 2121, 43, 1, 3, 77, 2, 9, 6, 5};
+//         printArray(array);
+//         qs(array, 0, array.length - 1);
+//         printArray(array);
+//     }
+// }
+
+//////////////////////////////////////////////  Sort //////////////////////////////////////////////
+public class test{
+    public static void (){
+
+    }
+
+    
+    public static void printArray(int[] arr) {
+        for (int num : arr) {
+            System.out.print(num + " ");
+        }
+        System.out.println();
+    }
+
+    public static void main(String[] args) {
+        int[] array = {34, 544, 2121, 43, 1, 3, 77, 2, 9, 6, 5};
+        printArray(array);
+        qs(array, 0, array.length - 1);
+        printArray(array);
+    }
+}
