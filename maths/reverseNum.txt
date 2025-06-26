@@ -1,0 +1,158 @@
+// Reverse Integer
+class Solution {
+    public int reverse(int n) {
+        int lastDig = 0;
+        while(n!=0|| n>0){
+            int mod = n%10;
+            n = n/10;
+            if(lastDig > 0 && lastDig> (Integer.MAX_VALUE - mod)/10 || lastDig <0 && lastDig< (Integer.MIN_VALUE - mod)/10) return 0;
+            lastDig = (lastDig*10)+mod;
+        }
+        return lastDig;
+    }
+}
+
+// Reverse digits
+class Solution {
+    public int reverseDigits(int n) {
+        // Code here
+        int lastdig;
+        int rev = 0;
+        while(n>0){
+            lastdig = n%10;
+            rev = (rev*10) + lastdig;
+            n = n/10;
+        }
+        return rev;
+    }
+}
+
+// Fibonacci Number
+class Solution {
+    public int fib(int n) {
+        if(n<=1){
+            return n;
+        }
+        return fib(n-1) + fib(n-2);
+    }
+}
+
+
+// Palindrome Number
+class Solution {
+    public boolean isPalindrome(int n) {
+         int lastDig = 0;
+         int m=n;
+        while(m>0){
+            int mod = m%10;
+            m = m/10;
+            lastDig = (lastDig*10)+mod;
+        }
+        if(lastDig==n){
+            return true;
+        }
+        return false;
+    }
+}
+
+class Solution {
+    public boolean isPalindrome(int n) {
+        // Code here
+        int lastdig;
+        int original = n;
+        int rev = 0;
+        while(n>0){
+            lastdig = n%10;
+            n = n/10;
+            rev = (rev*10)+ lastdig;
+        } return rev == original;
+    }
+}
+
+// Two Sum  
+class Solution {
+    public int[] twoSum(int[] nums, int target) {
+        for(int i =0; i<nums.length; i++){
+            for(int j=i+1; j<nums.length; j++){
+                if(nums[i] + nums[j] == target){
+                    return new int[]{i,j};
+                }
+            }
+        }
+        return new int[]{};
+    }
+}
+
+// Count Digits
+class Solution {
+    static int evenlyDivides(int n) {
+        // code here
+        int lastdig;
+        int original = n;
+        int count = 0;
+        while(n>0){
+            lastdig = n%10;
+            if(lastdig != 0 && original%lastdig ==0){
+                count++;
+            }
+            n = n/10;
+        }
+        return count;
+    }
+}
+
+// Check Armstrong
+import java.util.Scanner;
+public class Main {
+	public static int countDig(int n){
+		int temp = n;
+		int count =0;
+		while(temp>0){
+			count++;
+			temp = temp/10;
+		}return count;
+	}
+	public static int power(int base, int exp){
+		int result =1;
+		for (int i = 0; i < exp; i++) {
+            result *= base;
+        }
+        return result;
+	}
+	public static boolean armstrong(int n){
+		int temp =n;
+		int sum = 0;
+		int digits = countDig(n);
+		while(temp>0){
+			int lastGig = temp%10;
+			sum = sum + power(lastGig, digits);
+			temp = temp/10;
+		}return sum == n;
+	}
+	public static void main(String[] args) {
+		// Write your code here
+		Scanner sc = new Scanner(System.in);
+		int n = sc.nextInt();
+		System.out.println(armstrong(n));
+	}
+}
+
+
+easy: Check Armstrong
+class Solution {
+    static boolean armstrongNumber(int n) {
+        // code here
+        int lastdig;
+        int original = n;
+        int sum = 0;
+        while(n>0){
+            lastdig = n%10;
+            sum = sum + (lastdig*lastdig*lastdig);
+            n = n/10;
+        }
+        return sum == original;
+    }
+}
+
+
+
