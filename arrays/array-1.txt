@@ -117,3 +117,355 @@ public class Solution {
 		}else {return second;}
 	}
 }
+
+// 2nd Largest & Samllest
+public class Solution {
+    public static int[] getSecondOrderElements(int n, int []arr) {
+        // Write your code here.
+        int large = arr[0];
+        int secondlarge = Integer.MIN_VALUE;
+        int small = arr[0];
+        int secondsmallest = Integer.MAX_VALUE;
+        for(int i=1; i<n; i++){
+            if(arr[i]>large){
+                secondlarge = large;
+                large = arr[i];
+            }else if(arr[i]> secondlarge && arr[i]!=large){
+                secondlarge = arr[i];
+            }
+        }
+
+        for(int i= 1; i <n; i++){
+            if(arr[i]<small){
+                secondsmallest = small;
+                small = arr[i];
+            }else if(arr[i]<secondsmallest && arr[i]!= small){
+                secondsmallest = arr[i];
+            }
+        }
+
+        return new int[] {secondlarge, secondsmallest};
+    }
+}   
+
+// Remove Duplicates from Sorted Array
+class Solution {
+    public int removeDuplicates(int[] nums) {
+       int i = 0;
+       for(int j=1; j<nums.length; j++){
+            if(nums[i] != nums[j]){
+                nums[i+1] = nums[j];
+                i++;
+            }
+        } return i+1;
+    }
+}
+
+
+// Rotate Array
+class Solution {
+    public void rotate(int[] arr, int k) {
+        int n = arr.length;
+        k = k%n;
+        reverse(arr, 0, n-k-1);
+        reverse(arr, n-k, n-1);
+        reverse(arr, 0, n-1);
+    }
+    public void reverse(int[] arr, int i, int j){
+        while(i<=j){
+            int temp=arr[i];
+            arr[i]=arr[j];
+            arr[j]=temp;
+            i++;
+            j--;
+        }
+    }
+}
+
+// Move Zeroes to end 
+class Solution {
+    public void moveZeroes(int[] nums) {
+        int j = 0;
+        for(int i=0; i<nums.length; i++){
+            if(nums[i]!=0){
+                int temp = nums[i];
+                nums[i] = nums[j];
+                nums[j] = temp;
+                j++;
+            }
+        }   
+    }
+}
+
+//  Merge 2 Sorted Array
+import java.util.*;
+import java.util.ArrayList;
+import java.util.List;
+public class Solution {
+    public static List< Integer > sortedArray(int []a, int []b) {
+        // Write your code here
+        int i = 0;
+        int j = 0;
+        int asize = a.length;
+        int bsize = b.length;
+        List <Integer> Union = new ArrayList<>();
+        while(i<asize && j<bsize){
+            if(a[i]<=b[j]){
+                if(Union.size() == 0 || Union.get(Union.size()-1) != a[i]){
+                    Union.add(a[i]);
+                }
+                i++;
+            }else{
+                if(Union.size() ==0 || Union.get(Union.size()-1) != b[j]){
+                    Union.add(b[j]);
+                }
+                j++;
+            }
+        }
+        while (i < asize){
+            if(Union.get(Union.size()-1) != a[i]){
+                Union.add(a[i]);
+            }
+            i++;
+        }
+        while (j < bsize){
+            if (Union.get(Union.size()-1) != b[j]){
+                Union.add(b[j]);
+            }
+            j++;
+        }
+        return Union;
+    }
+}
+
+// Merge 2 Sorted Array Using Collections
+class Solution {
+    public static ArrayList<Integer> findUnion(int[] a, int[] b) {
+        // code here
+        int n = a.length;
+        int m = b.length;
+        HashSet <Integer> s = new HashSet<>();
+        ArrayList <Integer> u = new ArrayList<>();
+        for(int i=0; i<n; i++){
+            s.add(a[i]);
+        }
+        for(int j=0; j<m; j++){
+            s.add(b[j]);
+        }
+        for(int nums: s){
+            u.add(nums);
+        }
+        return u;
+    }
+}
+
+// Intersection Of 2 Array (unsorted)
+class Solution {
+    public int[] intersection(int[] nums1, int[] nums2) {
+        HashSet<Integer> arr1 = new HashSet<>();
+        for(int num : nums1){
+            arr1.add(num);
+        }
+        
+        HashSet<Integer> result = new HashSet<>();
+        for(int num : nums2){
+            if(arr1.contains(num)){
+                result.add(num);
+            }
+        }
+
+        int[] n = new int[result.size()];
+        int i =0;
+        for(int num : result){
+            n[i++] = num;
+        }
+        return n;
+    }
+}
+
+// Intersection Of 2 Array (unsorted) return duplicas as well : Intersection of Two Arrays II
+class Solution {
+    public int[] intersect(int[] arr1, int[] arr2) {
+        int[] freq = new int[1001];
+        for(int num : arr1){
+            freq[num]++;
+        }
+        
+        ArrayList<Integer> arr = new ArrayList<>();
+
+        for(int num : arr2){
+            if(freq[num]>0){
+                arr.add(num);
+                freq[num]--;
+            }
+        }
+       int[] k = new int[arr.size()];
+       for(int i=0; i<arr.size(); i++){
+        k[i] = arr.get(i);
+       }
+       return k;
+    }
+}
+
+// Intersection Of 2 Array (sorted)
+class Solution {
+    // Function to return a list containing the intersection of two arrays.
+    static ArrayList<Integer> intersection(int arr1[], int arr2[]) {
+        // add your code here
+        int i =0;
+        int j = 0;
+        int n = arr1.length;
+        int m = arr2.length;
+
+        ArrayList<Integer> arr = new ArrayList<>();
+        while(i<n && j<m){
+            if(arr1[i]<arr2[j]){
+                i++;
+            }else if(arr2[j]<arr1[i]){
+                j++;
+            } else {
+                if(arr.size() == 0 || arr.get(arr.size()-1) != arr1[i]){
+                    arr.add(arr1[i]);
+                }
+                i++;
+                j++;
+            }
+            
+        }return arr;
+    }
+}       
+
+// Missing Number
+class Solution {
+    public int missingNumber(int[] arr) {
+        int n = arr.length;
+        long sum1 = (long) n*(n+1)/2;
+        long sum2 = 0;
+        for (int i = 0; i < n; i++){
+            sum2 += arr[i];
+        }
+        if(n==1 && arr[0]==0){
+            return 1;
+        }
+        return (int)(sum1-sum2);
+    }
+}
+
+// Maximum Consecutive Ones
+import java.util.* ;
+import java.io.*; 
+public class Solution {
+	public static int consecutiveOnes(int n, int[] arr) {
+		// Write your code here.
+		int maxx = 0;
+		int count = 0;
+		for(int i=0; i<n; i++){
+			if(arr[i]==1){
+				count++;
+				maxx = Math.max(count, maxx);
+			}
+			else{
+				count = 0;
+			}
+		}
+		return maxx;
+	}
+}
+
+// Max Consecutive Bit
+class Solution {
+    public int maxConsecBits(int[] arr) {
+        // code here
+         int maxx = 1;
+        int count = 1;
+        for(int i=0; i<arr.length-1; i++){
+            if(arr[i]==arr[i+1]){
+                count++;
+                maxx = Math.max(count, maxx);
+            }else{
+                count = 1;
+            }
+        }
+        return maxx;
+    }
+}
+
+// Single Number
+    Input: nums = [2,2,1]
+    Output: 1
+
+    Explain:
+        xxor = 0
+        xxor = 0 ^ 7 = 7
+        xxor = 7 ^ 3 = 4
+        xxor = 4 ^ 5 = 1
+        xxor = 1 ^ 4 = 5
+        xxor = 5 ^ 5 = 0
+        xxor = 0 ^ 3 = 3
+        xxor = 3 ^ 4 = 7
+
+class Solution {
+    public int singleNumber(int[] arr) {
+        int xxor = 0;
+        for(int i=0; i<arr.length; i++){
+            xxor = xxor ^ arr[i];
+        }
+        return xxor;
+    }
+}
+
+// // /// Subarray Sum Equals K /// // //  import but  working partially (for positive and non zero array)
+class Solution {
+    public int subarraySum(int[] arr, int k) {
+        int left = 0;
+        int right = 0;
+        int maxlen = 0;
+        long sum = arr[0];
+        int n = arr.length;
+        while(right<n){
+            while(left<=right && sum >k){
+                sum -= arr[left];
+                left++;
+            }
+            if(sum==k){
+                maxlen = Math.max(maxlen, right-left+1);
+            }
+            right++;
+            if(right<n){
+                sum += arr[right];
+            }
+        }
+        return maxlen;
+    }
+}
+
+Most optimal for Negative and 0 value array
+class Solution {
+    public int longestSubarray(int[] arr, int k) {
+        // code here
+        int n = arr.length;
+        long sum = 0;
+        int maxlen = 0;
+        HashMap<Long, Integer> presum = new HashMap<>();
+        for(int i=0; i<n; i++){
+            sum += arr[i];
+            
+            if(sum==k){
+                maxlen = Math.max(maxlen, i+1);
+            }
+            
+            long rem = sum - k;
+            if(presum.containsKey(rem)){
+                int len = i - presum.get(rem);
+                maxlen = Math.max(maxlen, len);
+            }
+            if(!presum.containsKey(sum)){
+                presum.put(sum, i);
+            }
+        }
+        return maxlen;
+        
+    }
+}
+
+
