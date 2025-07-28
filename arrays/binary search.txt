@@ -432,3 +432,141 @@ class Solution {
         return low+k;
     }
 }
+
+// Minimum Number of Days to Make m Bouquets
+class Solution {
+    public boolean bloom(int[] arr, int mid, int k, int n, int m){
+        int cnt = 0;
+        int ans  = 0;
+        for(int i=0; i<n; i++){
+            if(arr[i]<=mid){
+                cnt++;
+            }else{
+                ans += (cnt/k);
+                cnt=0;
+            }
+        }
+        ans += (cnt/k);
+        return ans>=m;
+    }
+    
+    public int minDays(int[] arr, int m, int k) {
+        int low = Integer.MAX_VALUE;
+        int high = Integer.MIN_VALUE;
+        int n  = arr.length;
+        long check = (long)m*k;
+        if(check>n){
+            return -1;
+        }
+        for(int i=0; i<n; i++){
+            high = Math.max(high, arr[i]);
+            low = Math.min(low, arr[i]);
+        }
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(bloom(arr, mid, k, n, m)){
+                high = mid-1;
+            }
+            else{
+                low = mid +1;
+            }
+        }return low;
+    }
+}
+
+//  Capacity To Ship Packages Within D Days
+import java.util.Arrays;
+class Solution {
+    public int ans(int[] arr, int mid, int k, int n){
+        int day = 1;
+        int load =0;
+        for(int i=0; i<n; i++){
+            if((arr[i]+load)>mid){
+                day++;
+                load = arr[i];
+
+            }else{
+                load += arr[i];
+            }
+        }
+        return day;
+    }
+    
+    public int shipWithinDays(int[] arr, int k) {
+        int n = arr.length;
+        int low = -1;
+        for(int i=0; i<n; i++){
+            low = Math.max(arr[i], low);
+        }
+        int high = Arrays.stream(arr).sum();
+        while(low<=high){
+            int mid = (low+high)/2;
+            int res = ans(arr, mid, k, n);
+            if(res<=k){
+                high = mid-1;
+            }else{
+                low = mid+1;
+            }
+        }return low;
+    }
+}
+
+// Find Peak Element
+class Solution {
+    public int findPeakElement(int[] arr) {
+        int n = arr.length;
+        if(n==1){
+            return 0;
+        }
+        if(arr[0]>arr[1]){
+            return 0;
+        }
+        if(arr[n-1]>arr[n-2]){
+            return n-1;
+        }
+        int high = n-2;
+        int low = 1;
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(arr[mid]>arr[mid+1] && arr[mid]>arr[mid-1]){
+                return mid;
+            }else if(arr[mid]>arr[mid-1]){
+                low = mid +1;
+            }else {
+                high = mid-1;
+            }
+        }return -1;
+    }
+}
+
+// Aggressive Cows
+class Solution {
+    public static boolean check(int arr[], int mid, int k){
+        int cntCow= 1; 
+        int last = arr[0];
+        for(int i=1; i<arr.length; i++){
+            if((arr[i]-last)>=mid){
+                cntCow++;
+                last = arr[i];
+            }
+        }if(cntCow>=k){
+            return true;
+        }return false;
+    }
+    
+    public static int aggressiveCows(int[] arr, int k) {
+        // code here
+        Arrays.sort(arr);
+        int n = arr.length;
+        int low = 0; 
+        int high = arr[n-1]- arr[0];
+        while(low<=high){
+            int mid = (low+high)/2;
+            if(check(arr, mid, k)){
+                low = mid+1;
+            }else{
+                high = mid-1;
+            }
+        }return high;
+    }
+}

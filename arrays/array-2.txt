@@ -459,6 +459,77 @@ class Solution {
     }
 }
 
-// 
+// Majority Element II
+class Solution {
+    public List<Integer> majorityElement(int[] arr) {
+        int n = arr.length;
+        int ele1 = Integer.MIN_VALUE;
+        int ele2 = Integer.MIN_VALUE;
+        int cnt1 = 0;
+        int cnt2 = 0;
+        for(int i=0; i<n; i++){
+            if(cnt1==0 && arr[i] != ele2){
+                cnt1 = 1;
+                ele1 = arr[i];
+            }else if(cnt2==0 && arr[i] != ele1){
+                cnt2 = 1;
+                ele2 = arr[i];
+            }else if(arr[i]==ele1){
+                cnt1++;
+            }else if(arr[i]==ele2){
+                cnt2++;
+            }else {
+                cnt1--;
+                cnt2--;
+            }
+        }
+        int test1= 0;
+        int test2 =0;
+        for(int i=0; i<n; i++){
+            if(arr[i]==ele1){
+                test1++;
+            }
+            if(arr[i]==ele2){
+                test2++;
+            }
+        }
+        ArrayList<Integer> res = new ArrayList<>();
+        if(test1>n/3){
+            res.add(ele1);
+        }
+        if(test2>n/3){
+            res.add(ele2);
+        }
+        return res;
+    }
+}
+
+// Maximum Product Subarray
+class Solution {
+    public int maxProduct(int[] arr) {
+        int n = arr.length;
+        int mx = Integer.MIN_VALUE;
+        int pre = 1;
+        int premax= Integer.MIN_VALUE;
+        int sufmax =Integer.MIN_VALUE;
+        int suf = 1;
+        for(int i=0; i<n; i++){
+            if(pre==0){
+                pre =1;
+            }
+            if(suf==0){
+                suf=1;
+            }
+            pre *= arr[i];
+            premax = Math.max(premax, pre);
+            suf *= arr[n-i-1];
+            sufmax = Math.max(sufmax, suf);
+        }
+        mx = Math.max(mx, Math.max(premax,sufmax));
+        return  mx;
+    }
+}
+
+//
 
 
